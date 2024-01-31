@@ -1,0 +1,176 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block shop-content %}
+    {% include 'app/layout/message.html' %}
+{#    <section class="breadcrumb-section set-bg mt-4" data-setbg="{% static 'app/images/details/details-hero.jpg' %}">#}
+{#        <div class="container">#}
+{#            <div class="row">#}
+{#                <div class="col-lg-12 text-center">#}
+{#                    <div class="breadcrumb__text">#}
+{#                        <h2>Shopping</h2>#}
+{#                        <div class="breadcrumb__option">#}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+    <section style="padding-top: 20px;" class="product spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-5">
+                    <div class="sidebar">
+                        <div class="sidebar__item">
+                            <h4>Danh Mục</h4>
+                            <ul>
+                                {% for category in categories %}
+                                    <li><a href="{% url 'category' %}?category={{ category.slug }}">{{ category.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="sidebar__item">
+                            <h4>Giá</h4>
+                            <div class="price-range-wrap">
+                                <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                    data-min="10000" data-max="5000000">
+                                    <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                    <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                </div>
+                                <div class="range-slider">
+                                    <div class="price-input ">
+                                        <input style="min-width: 40%" type="text" id="minamount">
+                                        <input style="min-width: 40%" class="float-right" type="text" id="maxamount">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar__item sidebar__item__color--option">
+                            <h4>Màu sắc</h4>
+                            <div class="sidebar__item__color sidebar__item__color--white">
+                                <label for="white">
+                                    Trắng
+                                    <input type="radio" id="white">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--gray">
+                                <label for="gray">
+                                    Xám
+                                    <input type="radio" id="gray">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--red">
+                                <label for="red">
+                                    Đỏ
+                                    <input type="radio" id="red">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--black">
+                                <label for="black">
+                                    Đen
+                                    <input type="radio" id="black">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--blue">
+                                <label for="blue">
+                                    Xanh trời
+                                    <input type="radio" id="blue">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--green">
+                                <label for="green">
+                                    Xanh lá
+                                    <input type="radio" id="green">
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-7">
+                    <div class="product__discount">
+                        <div class="section-title product__discount__title">
+                            <h2>Nhiều lượt xem</h2>
+                        </div>
+                        <div class="row">
+                            <div class="product__discount__slider owl-carousel">
+                            {% if products_view %}
+                                {% for product in products_view %}
+                                    <div class="col-lg-4">
+                                    <div class="product__discount__item">
+                                        <div class="product__discount__item__pic set-bg"
+                                            data-setbg="{{ product.ImageURL }}">
+{#                                            <div class="product__discount__percent">-{{product.sale |floatformat:1 }}%  </div>#}
+                                            <ul class="product__item__pic__hover">
+                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                <li><a href="#" data-product={{product.id}} data-action="add"  class="add-btn update-btn"><i class="fa fa-shopping-cart"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product__discount__item__text">
+                                            <h5><a href="{% url 'detail' %}?id={{ product.id }}" >{{ product.name }}</a></h5>
+                                            <div class="product__item__price">{{ product.price }} <sup>đ</sup> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <div style="padding-top: 50px" class="row">
+                        {% for product in products %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ product.ImageURL }}">
+                                        <ul class="product__item__pic__hover">
+                                            <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <h6><a href="#">{{ product.name}}</a></h6>
+                                        <h5>{{product_price | get_item:product.id}} <sup>đ</sup></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-center">
+                            {% if products.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=1">&laquo; Đầu</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ products.previous_page_number }}">Trước</a>
+                                </li>
+                            {% endif %}
+
+                            <li class="page-item disabled">
+                                <span class="page-link">
+                                    Trang {{ products.number }}
+                                </span>
+                            </li>
+
+                            {% if products.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ products.next_page_number }}">Tiếp</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ products.paginator.num_pages }}">Cuối &raquo;</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    
+{% endblock shop-content %}

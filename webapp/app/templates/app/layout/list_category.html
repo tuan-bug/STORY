@@ -1,0 +1,38 @@
+<section class="categories mt-5">
+        <div class="container">
+            <div class="row featured__filter">
+                {% for category in categories %}
+                    <a href="{% url 'category' %}?category={{ category.slug }}">
+                        <div class="col-lg-2 col-md-4 col-sm-6 mix oranges fresh-meat">
+                            <div class="featured__item">
+                                <div class="featured__item__pic_category set-bg" data-setbg="{{category.ImageURL}}">
+                                </div>
+                                <div class="featured__item__text">
+                                    <h6><a href="{% url 'category' %}?category={{ category.slug }}">{{category.name}}</a></h6>
+
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+
+                {% endfor %}
+            </div>
+        </div>
+
+{#        <div class="container">#}
+{#            <div class="section-title">#}
+{#                <h2>Danh Mục</h2>#}
+{#            </div>#}
+{#            <div class="row">#}
+{#                <div class="categories__slider owl-carousel">#}
+{#                    {% for category in categories %}#}
+{#                    <div class="col-lg-3">#}
+{#                        <div class="categories__item set-bg" data-setbg="{{category.ImageURL}}">#}
+{#                            <h5><a href="{% url 'category' %}?category={{ category.slug }}">{{category.name}}</a></h5>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    {% endfor %}#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+    </section>

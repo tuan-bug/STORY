@@ -1,0 +1,147 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block blog-page %}
+    {% include 'app/layout/message.html' %}
+
+
+    <!-- Blog Details Section Begin -->
+    <section class="blog-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-5 order-md-1 order-2">
+                    <div class="blog__sidebar">
+
+                        <div class="blog__sidebar__item">
+                            <h4>Danh Mục Sản Phẩm</h4>
+                            <ul>
+                                <li><a href="#">Tất cả</a></li>
+                                <li><a href="#">Mỹ phẩm (20)</a></li>
+                                <li><a href="#">Đồ trang điểm (5)</a></li>
+                                <li><a href="#">Chăm sóc cơ thể (9)</a></li>
+                                <li><a href="#">Kính (10)</a></li>
+                            </ul>
+                        </div>
+                        <div class="blog__sidebar__item">
+                            <h4>Tin tức mới</h4>
+                            <div class="blog__sidebar__recent">
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img style="height: 50px;" src="{% static 'app/images/blog_125.jpg' %}" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>Mỹ phẩm Placentor Vegetal <br /> tại Việt Nam</h6>
+                                        <span>22/11/2023</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img style="height: 50px;" src="{% static 'app/images/blog_124.png' %}" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>Quà tặng từ thiên nhiên<br /> cho Phụ nữ Việt</h6>
+                                        <span>19/07/2023</span>
+                                    </div>
+                                </a>
+                                <a href="#" class="blog__sidebar__recent__item">
+                                    <div class="blog__sidebar__recent__item__pic">
+                                        <img style="height: 50px;" src="{% static 'app/images/blog123.png' %}" alt="">
+                                    </div>
+                                    <div class="blog__sidebar__recent__item__text">
+                                        <h6>Mỹ phẩm trang điểm <br />cho phái đẹp</h6>
+                                        <span>10/12/2023</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-7 order-md-1 order-1">
+                    <div class="blog__details__text">
+                        <img src="{% static 'app/images/blog_image_1.jpg' %}" alt="">
+                        <p>SWhite Repe đặt mục tiêu trở thành người bạn đồng hành để hoàn thiện vẻ đẹp bằng chính giá trị bên trong cho phụ nữ Việt.
+
+                        White Repe do Công ty TNHH Thương mại dịch vụ và Xuất nhập khẩu RB Khải Hoàn phát triển và phân phối.
+                            Những sản phẩm thuộc thương hiệu này được công ty hợp tác và nghiên cứu cùng các chuyên tại Nhật Bản.</p>
+                        <h3>Thương hiệu White Repe cam kết bảo vệ làn da cho phụ nữ Việt</h3>
+                        <p>Theo ông Hải, White Repe trong tiếng Nhật là "Hakusho", mang nghĩa là tờ giấy trắng. Nó tượng trưng cho sự trong sáng, thuần khiết và mỏng manh. Công ty mong muốn thực hiện mục tiêu là người bạn đồng hành để hoàn thiện vẻ đẹp bằng chính giá trị bên trong cho phụ nữ Việt qua thông điệp:
+                            "Sống thật với bản thân là cách tạo nên vẻ đẹp riêng".</p>
+                    </div>
+                    <div class="blog__details__content">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="blog__details__author">
+
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Blog Details Section End -->
+
+    <!-- Related Blog Section Begin -->
+    <section class="related-blog spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title related-blog-title">
+                        <h2>Bài viết bạn có thể thích</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="{% static 'app/images/blog123.png' %}" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> 15/10/2023</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#">Quà tặng từ thiên nhiên cho Phụ nữ Việt Nam</a></h5>
+                            <p>Những sản phẩm từ thiên nhiên của Cỏ Mềm là món quà đáp ứng nhu cầu, xu hướng chăm sóc sắc đẹp của phái đẹp</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="{% static 'app/images/blog_124.png' %}" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> 19/12/2023</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#">Mỹ phẩm Placentor Vegetal chính thức phân phối tại Việt Nam</a></h5>
+                            <p>Với sự xuất hiện của thương hiệu Placentor Vegetal, người dùng Việt Nam sẽ có thêm một sự lựa chọn khi mua các sản phẩm chăm sóc da.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6">
+                    <div class="blog__item">
+                        <div class="blog__item__pic">
+                            <img src="{% static 'app/images/blog_125.jpg' %}" alt="">
+                        </div>
+                        <div class="blog__item__text">
+                            <ul>
+                                <li><i class="fa fa-calendar-o"></i> 10/8/2023</li>
+                                <li><i class="fa fa-comment-o"></i> 5</li>
+                            </ul>
+                            <h5><a href="#">Mỹ phẩm trang điểm cơ bản cho phái đẹp</a></h5>
+                            <p>Phấn nước cushion, bảng màu mắt, son môi, kem chống nắng và nước tẩy trang là phụ kiện make-up cơ bản giúp phái đẹp tân trang diện mạo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock blog-page %}

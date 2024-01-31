@@ -1,0 +1,87 @@
+{% extends 'admin/manage.html' %}
+{% load static %}
+{% block blog-product %}
+    {% include 'admin/layout/message.html' %}
+    <div class="mt-4">
+        <h2 class="text-center">QUẢN LÝ THÀNH VIÊN</h2>
+        <div class="container-fluid">
+            <div class="text-right mb-3">
+                <button class="btn btn-primary btn-icon-split p-2" data-toggle="modal" ><a style="color: white" href="{% url 'addUser' %}">Thêm người dùng</a></button>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Tên Đăng Nhập</th>
+                                    <th>Họ tên</th>
+                                    <th>Email</th>
+                                    <th>Quyền</th>
+                                    <th>Thao Tác</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for user in users %}
+                                    <tr>
+                                        <td>
+                                            {{ user.id }}
+                                        </td>
+                                        <td>
+                                            {{ user.username }}
+                                        </td>
+                                        <td>
+                                            {{ user.last_name }}  {{ user.first_name }}
+                                        </td>
+                                        <td>
+                                            {{ user.email }}
+                                        </td>
+                                        <td>
+                                            {% if user.is_staff %}
+                                                Admin
+                                            {% else %}
+                                                Người dùng
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <a href="{% url 'editUser' %}?id={{ user.id }}" class="btn btn-warning btn-circle mr-2">
+                                            <img src="{% static 'admin/icons/pen (1).png' %}" alt="">
+                                            </a>
+                                            <a href="" data-product-id="{{ order.id }}"
+                                            data-product-name="{{ order.name }}"
+                                            class="btn btn-danger btn-circle"
+                                            data-toggle="modal" data-target="#deleteUserModal_{{ user.id }}">
+                                            <img src="{% static 'admin/icons/trash (1).png' %}" alt="">
+                                            </a>
+
+                                            <div class="modal" id="deleteUserModal_{{user.id }}">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Xóa Thông TIn Người Dùng </h5>
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Bạn có chắc chắn muốn xóa thông tin người dùng không <span id="product-name"></span>?</p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                                            <a href="{% url 'deleteUser' user.id %}" type="button" class="delete-product btn btn-danger">Xác nhận</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock blog-product %}

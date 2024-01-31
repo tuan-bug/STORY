@@ -1,0 +1,45 @@
+{% extends 'admin/manage.html' %}
+{% load static %}
+{% block blog-slide %}
+    {% include 'admin/layout/message.html' %}
+    <section style="padding-top: 30px;" class="product-details spad">
+        <div class="container">
+        <h3 class="text-center mb-3">CHI TIẾT SẢN PHẨM</h3>
+            <div class="row">
+                <div class="col-lg-5 col-md-5">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img style="width: 100%"  class="product__details__pic__item--large"
+                                src="{{product.ImageURL}}" alt="">
+                        </div>
+                        <div class="product__details__pic__slider owl-carousel mt-3">
+                            <h6 class="pb-1"><b>Danh sách ảnh</b></h6>
+
+                            {% for product_image in product_images %}
+                                <img style="width: 100px" data-imgbigurl="{{ product_image.ImageURL }}"
+                                src="{{ product_image.ImageURL }}" alt="">
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-7">
+                    <div class="product__details__text ml-2">
+                        <h5> <b>Tên sản phẩm:</b> {{product.name}}</h5>
+                        <h5> <b>Danh mục:</b>
+                            {% for category_name in category_names_list %}
+                                <span>{{ category_name }}</span>,
+                            {% endfor %}</h5>
+                        <h5> <b>Giá:</b> {{product.price}}</h5>
+                        <h5> <b>Giá khuyến mãi:</b> {{product.price_sale}}</h5>
+                        <h5> <b>Đơn vị:</b> {{product.unit}}</h5>
+                        <h5> <b>Số lượng:</b> {{product.count}}</h5>
+                        <h5> <b>Số lượt xem:</b> {{product.view}}</h5>
+                        <h5> <b>Số lượt bán:</b> {{product.sell_number}}</h5>
+                        <h5> <b>Mô tả:</b> {{product.describe}}</h5>
+                        <h5> <b>SP moi:</b> {{product.product_new}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock blog-slide %}

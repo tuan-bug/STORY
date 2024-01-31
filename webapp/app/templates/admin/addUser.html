@@ -1,0 +1,55 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'admin/layout/head.html' %}
+    <body id="page-top">
+        <div id="wrapper">
+            <!-- Sidebar -->
+            {% include 'admin/layout/sidebar.html' %}
+            <div id="content-wrapper" class="d-flex flex-column">
+                {% include 'admin/layout/topbar.html' %}
+                <div class="container mx-auto" style="max-width: 400px;">
+                    <h2 class="text-center">THÊM NGƯỜI DÙNG</h2>
+                    <form method="POST" action = "" >
+                    {% comment %}tránh lỗi bảo mật {% endcomment %}
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="name">Tên đăng nhập:</label>
+                            {{form.username}}
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            {{form.email}}
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Họ:</label>
+                            {{form.first_name}}
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Tên:</label>
+                            {{form.last_name}}
+                        </div>
+                        <div class="form-group">
+                           <label for="password">Mật khẩu:</label>
+                           {{form.password1}}
+                        </div>
+                        <div class="form-group">
+                           <label for="confirm-password">Xác nhận mật khẩu:</label>
+                           {{form.password2}}
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-icon-split p-2">Thêm người dùng</button>
+                        </div>
+
+                    </form>
+                </div>
+                <!-- Footer -->
+            </div>
+        <div>
+
+        <!-- Logout Modal-->
+        {% include 'admin/layout/modal.html' %}
+        {% include 'admin/layout/script.html' %}
+    </body>
+</html>

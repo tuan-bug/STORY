@@ -1,0 +1,49 @@
+{% if messages %}
+    <style>
+        .custom-alert {
+            position: fixed;
+            top: 80px; /* Vị trí từ phía trên (cách top 10px) */
+            right: 10px; /* Vị trí từ phía phải (cách right 10px) */
+            color: white; /* Màu chữ */
+            padding: 10px; /* Khoảng cách lề bên trong */
+            border-radius: 4px; /* Góc bo tròn */
+            z-index: 1000; /* Độ ưu tiên hiển thị trên các phần tử khác */
+            display: block;
+        }
+
+        .custom-alert-error {
+            background-color: #f44336; /* Màu nền thông báo lỗi (đỏ) */
+        }
+
+        .custom-alert-success {
+            background-color: #4CAF50; /* Màu nền thông báo thành công (xanh) */
+        }
+    </style>
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == "error" %}
+                <div class="custom-alert custom-alert-error">
+                    {{ message }}
+                </div>
+            {% elif message.tags == "success" %}
+                <div class="custom-alert custom-alert-success">
+                    {{ message }}
+                </div>
+            {% elif message.tags == "warning" %}
+                <div class="custom-alert custom-alert-warning">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %} 
+
+    <script>
+        // Sử dụng JavaScript để ẩn tất cả các thông báo sau 3 giây (3000 mili giây)
+        setTimeout(function () {
+            var alertMessages = document.querySelectorAll(".custom-alert");
+            for (var i = 0; i < alertMessages.length; i++) {
+                alertMessages[i].style.display = "none";
+            }
+        }, 3000); // 3 giây
+    </script>
+{% endif %}

@@ -1,0 +1,193 @@
+{#{% load static %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#    {% include 'admin/layout/head.html' %}#}
+{##}
+{#    <body id="page-top">#}
+{#    <div id="wrapper">#}
+{#        <!-- Sidebar -->#}
+{#        {% include 'admin/layout/sidebar.html' %}#}
+{##}
+{#        <!-- Content Wrapper -->#}
+{#        <div id="content-wrapper" class="d-flex flex-column">#}
+{#            {% include 'admin/layout/topbar.html' %}#}
+{#            <!-- Main Content -->#}
+{#            <div id="content">#}
+{#                <div class="container mt-4" style="width: 550px">#}
+{#                    <h2 class="mb-4 text-center">SỬA SLIDE </h2>#}
+{#                    <form method="POST" action="" enctype="multipart/form-data">#}
+{#                        {% csrf_token %}#}
+{#                        <div class="form-group">#}
+{#                            <label for="categoryName">Danh Mục <span class="required">*</span></label>#}
+{#                            {{ form.category_slide }}#}
+{#                        </div>#}
+{##}
+{#                        <div class="form-group">#}
+{#                            <label for="categoryDescription">Tên Slide <span class="required">*</span></label>#}
+{#                            {{ form.name }}#}
+{#                        </div>#}
+{#                        <div class="form-group">#}
+{#                            <label for="{{ form.image.id_for_label }}">Chọn ảnh: </label>#}
+{#                            <div class="input-group">#}
+{##}
+{#                                <div class="custom-file">#}
+{#                                    {{ form.image }}#}
+{#                                    <label class="custom-file-label" for="{{ form.image.id_for_label }}">Choose file</label>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <div class="d-flex justify-content-center">#}
+{#                            <button type="submit" class="btn btn-primary">Sửa Slide</button>#}
+{#                        </div>#}
+{##}
+{#                  </form>#}
+{#                </div>#}
+{#            </div>#}
+{##}
+{#            <!-- Footer -->#}
+{#            <footer class="sticky-footer bg-white">#}
+{#                <div class="container my-auto">#}
+{#                    <div class="copyright text-center my-auto">#}
+{#                        <span>Copyright &copy; Your Website 2021</span>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </footer>#}
+{#        </div>#}
+{#    </div>#}
+{#    <a class="scroll-to-top rounded" href="#page-top">#}
+{#        <i class="fas fa-angle-up"></i>#}
+{#    </a>#}
+{#    <!-- Logout Modal-->#}
+{#    {% include 'admin/layout/modal.html' %}#}
+{#    {% include 'admin/layout/script.html' %}#}
+{#    <style>#}
+{#        .required{#}
+{#        color: red;#}
+{#        margin-left: 3px;#}
+{#        }#}
+{#        #id_category_slide{#}
+{#            display: block;#}
+{#            width: 100%;#}
+{#            height: calc(1.5em + 0.75rem + 2px);#}
+{#            padding: 0.375rem 0.75rem;#}
+{#            font-size: 1rem;#}
+{#            font-weight: 400;#}
+{#            line-height: 1.5;#}
+{#            color: #6e707e;#}
+{#            background-color: #fff;#}
+{#            background-clip: padding-box;#}
+{#            border: 1px solid #d1d3e2;#}
+{#            border-radius: 0.35rem;#}
+{#            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;#}
+{#        }#}
+{#    </style>#}
+{#</body>#}
+{#</html>#}
+{##}
+
+<!-- Modal sửa slide -->
+{#<div class="modal fade" id="editSlideModal{{ slide.id }}" tabindex="-1" aria-labelledby="editSlideModalLabel" aria-hidden="true">#}
+{#    <div class="modal-dialog">#}
+{#        <div class="modal-content">#}
+{#            <div class="modal-header">#}
+{#                <h5 class="modal-title" id="editSlideModalLabel">Sửa Slide</h5>#}
+{#                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                    <span aria-hidden="true">&times;</span>#}
+{#                </button>#}
+{#            </div>#}
+{#            <div class="modal-body">#}
+{#                <!-- Form sửa slide -->#}
+{#                <form id="editSlideForm" method="POST" enctype="multipart/form-data">#}
+{#                    {% csrf_token %}#}
+{#                    <!-- Các trường form -->#}
+{#                    <div class="form-group">#}
+{#                        <label for="categoryName">Danh Mục <span class="required">*</span></label>#}
+{#                        <input type="text" id="category_slide" name="category_slide">#}
+{#                    </div>#}
+{##}
+{#                    <div class="form-group">#}
+{#                        <label for="categoryDescription">Tên Slide <span class="required">*</span></label>#}
+{#                        <input type="text" id="name" name="name">#}
+{#                    </div>#}
+{##}
+{#                    <div class="form-group">#}
+{#                        <label for="image">Chọn ảnh: </label>#}
+{#                        <input type="file" name="image" accept="image/*">#}
+{#                    </div>#}
+{##}
+{#                    <button type="button" class="btn btn-primary" onclick="saveEditSlide()">Lưu</button>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+
+<!-- Nút sửa slide -->
+
+
+
+
+
+<div class="modal fade" id="editSlideModal{{ slide.id }}" tabindex="-1" aria-labelledby="editSlideModalLabel{{ slide.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editSlideModalLabel{{ slide.id }}">Sửa Slide</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Thêm form sửa slide vào đây -->
+                <form action="{% url "editSlide" slide.id %}" id="editSlideForm{{ slide.id }}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Các trường form -->
+                    <div class="form-group">
+                        <label for="categoryName">Danh Mục <span class="required">*</span></label>
+                        <select name="category_slide" class="category_slide">
+                            {% for category in categories %}
+                                <option value="{{ category.id }}" {% if category.id == slide.category_slide.id %}selected{% endif %}>
+                                    {{ category.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categoryDescription">Tên Slide <span class="required">*</span></label>
+                        <input class="name" type="text" name="name" value="{{ slide.name }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Chọn ảnh: </label>
+                        <input class="image" type="file" name="image" accept="image/*">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" onclick="saveEditSlide({{ slide.id }})">Lưu</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <style>
+        .required{
+        color: red;
+        margin-left: 3px;
+        }
+        .category_slide, .name, .image{
+            display: block;
+            width: 100%;
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #6e707e;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #d1d3e2;
+            border-radius: 0.35rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+    </style>

@@ -1,0 +1,21 @@
+{% extends "payment/base_layout.html" %}
+{% block content %}
+    <div class="panel panel-default">
+        <div class="panel-heading">{{ title }}: {{ result }}</div>
+        <div class="panel-body">
+            <p>Mã hóa đơn:{{ order_id }}</p>
+            <p>Tổng tiền:{{ amount }}</p>
+            <p>Nội dung thanh toán:{{ order_desc }}</p>
+            <p>Mã thanh toán:{{ vnp_TransactionNo }}</p>
+            {% if vnp_ResponseCode == '00' %}
+                <p>Trạng thái thanh toán:  Thành công</p>
+            {% else %}
+                <p>Trạng thái thanh toán: Lỗi</p>
+            {% endif %}
+            {% if msg %}
+                <p class="alert-warning"> {{ msg }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <a href="{% url 'home' %}">Tiếp tục mua hàng</a>
+{% endblock %}

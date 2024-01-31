@@ -1,0 +1,92 @@
+{% extends 'admin/manage.html' %}
+{% load static %}
+
+{% block view-order %}
+    {% include 'admin/layout/message.html' %}
+    <div class="row">
+    <div class="col-lg-2">
+    </div>
+        <div class="col-lg-6">
+            <!-- Default Card Example -->
+            <div class="card mb-4">
+                <div class="card-header mb-4">
+                    Chi tiết đơn hàng
+                </div>
+                <div class="container">
+                    <div class="row">
+                    <div class="col-lg-12">
+                        <div>
+                            <table style="width: 100%">
+                                <tbody>
+                                    {% for item in items %}
+                                    <tr >
+                                        <td>
+                                            <img  src="{{ item.product.ImageURL }}" style="width: 60px; height: auto;" alt="">
+                                        </td>
+                                        <td>
+                                            {{item.product.name}}
+                                        </td>
+                                        <td>
+                                            {{item.product.price}}
+                                        </td>
+                                        <td>
+                                            x {{item.quantity}}
+                                        </td>
+                                        <td>
+                                            {{ item.total | floatformat:0 }} VND
+                                        </td>
+                                    </tr>
+
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex flex-column float-right">
+                            <div class="float-right text-lg-right">
+                                <h6><b>Tổng cộng:</b> {{ total}} VND</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Basic Card Example</h6>
+                </div>
+                <div class="card-body">
+                    <div id="shipping-info">
+                        <h5>Khách hàng</h5>
+                        {{ order.customer.username }}
+                    </div>
+                    <hr class="sidebar-divider d-none d-md-block">
+                    <div id="shipping-info">
+                        <h6>LIÊN HỆ</h6>
+                        {{ order.customer.email }}
+
+                    </div>
+                    <hr class="sidebar-divider d-none d-md-block">
+                    <div id="shipping-info">
+                        <h6>ĐỊA CHỈ GIAO HÀNG</h6>
+                            <span>{{ order.address.name_user }}</span>
+                            <br/>
+                            <span>{{ order.address.mobile }}</span>
+                            <br/>
+                            <span>{{ order.address.adress }}</span>
+                            <br/>
+                            <span>{{ order.address.commune }}</span>
+                            <br/>
+                            <span>{{ order.address.district }}</span>
+                            <br/>
+                            <span>{{ order.address.city }}</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock view-order %}

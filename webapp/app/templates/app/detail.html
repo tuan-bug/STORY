@@ -1,0 +1,176 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+{% block category_context %}
+    {% include 'app/layout/message.html' %}
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-4">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img style="width: 100%" class="product__details__pic__item--large"
+                                src="{{story.ImageURL}}" alt="">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8">
+                    <div class="product__details__text">
+                        <h3>{{story.name}}</h3>
+                        <div class="product__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <span>(18 đánh giá)</span>
+                        </div>
+                    <div class="d-flex">
+                        <div class="product__details__rating p-3">
+                            <i class="fa fa-star"></i>
+                            {{ story.view}} view
+                        </div>
+                        <div class="product__details__rating p-3">
+                            <i class="fa fa-star"></i>
+                            {{ story.likes }} like
+                        </div>
+                        <div class="product__details__rating p-3">
+                            <i class="fa fa-star"></i>
+                            {{ story.count_comment }} comment
+                        </div>
+                    </div>
+
+                        <div class="product__details__text mb-2">Trạng thái:
+                            {% if products.count > 0 %}
+                                Còn hàng
+                            {% else %}
+                                Hết hàng
+                            {% endif %}
+                        </div>
+                        <div class="product__details__text mb-2"> <b>Tác giả:</b> {{ story.author }}</div>
+                        <div class="product__details__text mb-2"> <b>Tình trạng: </b> {{ story.status }} </div>
+                        <div class="product__details__text mb-2"> <b> Thể loại: </b> </div>
+                        <div class="product__details__text mb-2"> <b> Xếp hạng: </b> xxx </div>
+                    
+                    <div class="d-flex ">
+                         <a style="color: white;" class="primary-btn btn-sm border-0 text-uppercase" href="{% url 'edit_information' %}">Đọc ngay</a>
+
+                        <a style="color: white;" class="primary-btn btn-sm border-0 text-uppercase" href="{% url 'addAddress' %}">Chap mới nhất</a>
+                        <a style="color: white;" class="primary-btn btn-sm border-0 text-uppercase" href="{% url 'addAddress' %}">Theo dõi</a>
+                    </div>
+
+                    </div>
+                </div>
+            
+                <div class="col-lg-12">
+                    <div class="product__details__text">
+                        <div class="product__details__text mb-2 text-justify"> <b>Mô tả: </b>{{ story.description }} </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                    aria-selected="true">Chương</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                    aria-selected="false">Bình luận <span>({{ comments.count }})</span></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc">
+
+                                    <div style="max-width: 800px; " class="container shadow rounded">
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-6 d-flex p-3">
+                                                <div class="col-lg-10 col-md-6">
+                                                    <b>Số chương</b>
+
+                                                </div>
+                                                <div class="col-lg-2 ">
+                                                Sắp xếp
+                                                </div>
+                                            </div>
+                                            
+                                            {% for chapter in chapters %}
+                                                <a class="d-flex col-lg-12" href="https://www.nettruyenclub.com/truyen-tranh/vo-anh-de-lai-pha-hong-showbiz-75794">
+                                                    <div class="col-lg-2 col-md-2">
+                                                        <div>
+                                                            <div class="product__details__pic">
+                                                                <div class="product__details__pic__item">
+                                                                    <img  class="product__details__pic__item--large"
+                                                                        src="{{chapter.ImageURL}}" alt="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-8 d-flex align-items-center ">
+                                                        <div >
+                                                            <div class="product__details__pic">
+{#                                                                <div class="product__details__pic__item">#}
+{#                                                                    Chương 1#}
+{#                                                                </div>#}
+                                                                <div class="product__details__pic__item">
+                                                                    {{ chapter.name }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-2 col-md-2 d-flex align-items-center">
+                                                        <div>
+                                                            <div class="product__details__pic">
+                                                                {{ chapter.date | date:"d/m/Y" }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane" id="tabs-3" role="tabpanel">
+                                <div class="product__details__tab__desc">
+                                    <div class="col-lg-12">
+                                        <div class="">
+                                            <div class="tab-content form-outline w-100">
+                                                <form  method="POST" action="">
+                                                    {% csrf_token %}
+                                                    {{ form.title }}
+                                                    <div class="float-end mt-2 pt-1">
+                                                        <button name="comment" type="submit" class="btn primary-btn btn-sm">Bình luận</button>
+                                                    </div>
+                                                </form>
+{#                                                <h4 class="pt-3 pb-2">Bình luận</h4>#}
+{#                                                    {% for comment in comments %}#}
+{#                                                    <div class="d-flex flex-start mb-4">#}
+{#                                                        <img class="rounded-circle shadow-1-strong me-3"#}
+{#                                                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="55"#}
+{#                                                            height="55" />#}
+{#                                                        <div class="ml-3">#}
+{#                                                           <span> <span style="font-weight: bold; margin-right: 10px;">{{ comment.user.first_name }} </span>{{ comment.date|date:"d/m/Y" }} </span>#}
+{##}
+{##}
+{#                                                            <p class="mb-0">{{ comment.title }}</p>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    {% endfor %}#}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock category_context %}

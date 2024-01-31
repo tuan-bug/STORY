@@ -1,0 +1,30 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+{% block login_content %}
+<h5 class="pt-3 text-uppercase text-center">KẾT QUẢ TÌM KIẾM: {{ search }}</h5>
+    <section class="mt-5">
+        <div class="container">
+            <div class="row featured__filter">
+
+                {% for product in keys %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
+                    <div class="featured__item">
+                        <div class="featured__item__pic set-bg" data-setbg="{{product.ImageURL}}">
+                            <ul class="featured__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#" data-product={{product.id}} data-action="add"  class="add-btn update-btn"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="featured__item__text">
+                            <h6><a href="{% url 'detail' %}?id={{ product.id }}">{{product.name}}</a></h6>
+                            <h5>${{product.price | floatformat:2}}</h5>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock login_content %}

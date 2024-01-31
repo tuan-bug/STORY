@@ -1,0 +1,33 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+{% block register_content %}
+    {% include 'app/layout/message.html' %}
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <h2 class="text-center">ĐĂNG NHẬP</h2>
+          <form method="POST" action = "" >
+              {% csrf_token %}
+            <div class="form-group">
+              <label for="email">Tên Đăng Nhập</label>
+              <input type="username" class="form-control" name="username" placeholder="Nhập username">
+            </div>
+            <div class="form-group">
+              <label for="password">Mật Khẩu</label>
+              <input type="password" class="form-control" name="password" placeholder="Nhập mật khẩu">
+            </div>
+          <div class="d-flex justify-content-center">
+              <button type="submit" class="btn primary-btn">Đăng nhập</button>
+          </div>
+              {% for message in messages %}
+                <p id="message">{{ message }}</p>
+              {% endfor %}
+            <br/>
+            <p style="color: black" class="">Bạn chưa có tài khoản <a style="color: black;"  href="{% url 'register' %}"><b>Đăng Kí</b></a></p>
+          </form>
+        </div>
+      </div>
+    </div>
+   
+{% endblock register_content %}

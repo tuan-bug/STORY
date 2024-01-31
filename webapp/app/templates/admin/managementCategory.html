@@ -1,0 +1,106 @@
+{% extends 'admin/manage.html' %}
+{% load static %}
+{% block blog-category %}
+    {% include 'admin/layout/message.html' %}
+    <div class=" mt-4">
+       <h2 class="text-center">QUẢN LÝ DANH MỤC</h2>
+        <div class="container-fluid">
+            <div class="text-right mb-3">
+                <button class="btn btn-primary btn-icon-split p-2" data-toggle="modal" ><a style="color: white" href="{% url 'addCategory' %}">Thêm danh mục</a></button>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr style="padding-bottom: 25px;">
+                                    <th>ID</th>
+                                    <th>Ảnh</th>
+                                    <th>Tên Danh Mục</th>
+                                    <th>Đường Dẫn</th>
+                                    <th>Thao Tác</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for category in categories %}
+                                <tr>
+                                    <td>
+                                        {{ category.id }}
+                                    </td>
+                                    <td>
+                                        <img style="height: 100px" src="{{ category.ImageURL }}" alt="">
+                                    </td>
+                                    <td>
+                                        {{ category.name }}
+                                    </td>
+                                    <td>
+                                        {{ category.slug }}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'editCategory' %}?id={{ category.id }}" class="mr-2 btn btn-warning btn-circle">
+                                            <img src="{% static 'admin/icons/pen (1).png' %}" alt="">
+                                        </a>
+                                        <a href="" data-product-id="{{ category.id }}"
+                                            data-product-name="{{ category.name }}"
+                                            class="mr-2 btn btn-danger btn-circle"
+                                            data-toggle="modal" data-target="#deleteCategoryModal_{{ category.id }}">
+                                            <img src="{% static 'admin/icons/trash (1).png' %}" alt="">
+                                        </a>
+                                        <div class="modal" id="deleteCategoryModal_{{ category.id }}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Xóa Danh Mục</h5>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Bạn có chắc chắn muốn xóa danh mục sản phẩm <span id="product-name"></span>?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                                        <a href="{% url 'deleteCategory' category.id %}" type="button" class="delete-product btn btn-danger">Xác nhận</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {% if categories.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">&laquo; Đầu</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ categories.previous_page_number }}">Trước</a>
+                    </li>
+                {% endif %}
+
+                <li class="page-item disabled">
+                    <span class="page-link">
+                        Trang {{ categories.number }}
+                    </span>
+                </li>
+
+                {% if categories.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ categories.next_page_number }}">Tiếp</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ categories.paginator.num_pages }}">Cuối &raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        </div>
+    </div>
+{% endblock blog-category %}

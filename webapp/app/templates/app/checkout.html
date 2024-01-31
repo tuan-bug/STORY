@@ -1,0 +1,127 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+{% block content_checkout %}
+    {% include 'app/layout/message.html' %}
+    <div class="container mb-4" xmlns="http://www.w3.org/1999/html">
+        <div class="row" style="width:100%">
+            <div class="col-md-5">
+
+                <div class="box-element" id="form-wrapper">
+                    <form id="form" method="POST" action="">
+                        {% csrf_token %}
+                        {% if form_show == "show" %}
+                            <div id="shipping-info" class="form-show">
+                            <h4>CHỌN ĐỊA CHỈ NGƯỜI DÙNG</h4>
+                                {% for address in allAddress %}
+                                    <div class="form-check p-2">
+                                        <input class="form-check-input ml-1" type="radio" name="address" id="address{{ forloop.counter }}" value="{{ forloop.counter }}"
+                                               data-id="{{  address.id }}" data-name="{{  address.name_user }}" data-moblie="{{ address.mobile }}" data-address="{{ address.adress }}"
+                                               data-commune="{{ address.commune }}" data-district="{{ address.district }}" data-city="{{ address.city }}">
+                                        <label class="form-check-label ml-4" for="address{{ forloop.counter }}">
+                                            Địa chỉ: {{ address.name_user }} - {{ address.mobile }} - {{ address.adress }}
+                                             - {{ address.commune }} - {{ address.district }} - {{ address.city }}
+                                        </label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                        {% endif %}
+                    <div id="shipping-info" class="form-show">
+                        <h4>CHỌN PHƯƠNG THỨC THANH TOÁN</h4>
+                        <div class="form-check p-2">
+                            <input class="form-check-input ml-1" type="radio" id ="payment_method_receive" name="payment_method" value="cash_on_delivery">
+                            <label class="form-check-label ml-4">Thanh toán khi nhận hàng</label>
+                        </div>
+                        <div class="form-check p-2">
+                            <input class="form-check-input ml-1" type="radio" id ="payment_method_pay" name="payment_method" value="credit_card">
+                            <label class="form-check-label ml-4">Thanh toán bằng thẻ</label>
+                        </div>
+                    </div>
+                        <button id="submit-button" type="submit" class="btn primary-btn btn-sm"><a style="color: white" href="{% url 'address' %}?address={{ address.id }}">Mua Hàng</a></button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="box-element">
+                    <h3>SẢN PHẨM</h3>
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th>Ảnh</th>
+                            <th>Sản phẩm</th>
+                            <th>Đơn Giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for item in items %}
+                          <tr>
+                            <td> <img style="height: 80px; width: auto;" src="{{item.product.ImageURL}}"/> </td>
+                            <td>{{item.product.name}}</td>
+                            <td>${{item.product.price}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>${{ item.total }}</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                      <div class="text-right">
+                        <h4>Tổng cộng: {{total_all }} VNĐ</h4>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("form");
+        const addressRadios = form.querySelectorAll('input[type="radio"][name="address"]');
+        const paymentRadios = form.querySelectorAll('input[type="radio"][name="payment_method"]');
+        const submitButton = document.getElementById("submit-button");
+
+        submitButton.addEventListener("click", function (event) {
+            event.preventDefault();  // Prevent the default form submission
+
+            let selectedAddress = null;
+            let idAddress = null;
+            let paymentMethod = null;
+
+            // Find the selected address
+            addressRadios.forEach(function (radio) {
+                if (radio.checked) {
+                    selectedAddress = {
+                        id: radio.getAttribute("data-id"),
+                        name_user: radio.getAttribute("data-name"),
+                        mobile: radio.getAttribute("data-mobile"),
+                        address: radio.getAttribute("data-address"),
+                        commune: radio.getAttribute("data-commune"),
+                        district: radio.getAttribute("data-district"),
+                        city: radio.getAttribute("data-city"),
+                    };
+                    idAddress = selectedAddress.id;
+                }
+            });
+
+            // Find the selected payment method
+            paymentRadios.forEach(function (radio) {
+                if (radio.checked) {
+                    paymentMethod = radio.value;
+                }
+            });
+
+            if (selectedAddress && paymentMethod) {
+                // Store selected address and payment method in sessionStorage
+                sessionStorage.setItem("selectedAddress", JSON.stringify(selectedAddress));
+                sessionStorage.setItem("paymentMethod", paymentMethod);
+
+                // Redirect to the address page with the selected address ID and payment method as parameters
+                window.location.href = "{{ URL }}/address/?id=" + idAddress + "&payment_method=" + paymentMethod;
+            }
+        });
+    });
+
+</script>
+
+{% endblock content_checkout %}

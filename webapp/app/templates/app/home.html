@@ -1,0 +1,120 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block main-content %}
+    {% include 'app/layout/message.html' %}
+
+{#    <section class="categories mt-5">#}
+{#        <div class="container">#}
+{#            <div class="row featured__filter justify-content-center">#}
+{#                {% for story in storys %}#}
+{#                    <a href="">#}
+{#                        <div class="col-lg-2 col-md-4 col-sm-6 mix oranges fresh-meat">#}
+{#                            <div class="featured__item">#}
+{#                                <div class="featured__item__pic_category set-bg" data-setbg="{{story.ImageURL}}">#}
+{#                                </div>#}
+{#                                <div class="featured__item__text">#}
+{#                                    <h6><a href="{% url 'category' %}?category={{ story.slug }}">{{story.name}}</a></h6>#}
+{##}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </a>#}
+{#                {% endfor %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+    <!-- Trong file templates/your_app/categories.html -->
+    <section class="categories mt-fix ">
+        <div class="container">
+            <h2>Truyện đề cử ></h2>
+            <div class="row mt-2">
+                <div class="categories__slider owl-carousel">
+                    {% for story in storys %}
+                        <div class="col-lg-3">
+                            <div class="categories__item set-bg" data-setbg="{{ story.image.url }}">
+                                <div class="slide_caption">
+                                    <div class="abcd">
+                                        <a class="color_slide" href="">
+                                            {{ story.name }}
+                                        </a>
+                                    </div>
+                                    <div class="d-flex small justify-content-between p-1">
+                                        <div class="">
+                                            <i class="fa fa-star"></i>
+                                            {{ story.view}} view
+                                        </div>
+                                        <div class="">
+                                            <i class="fa fa-star"></i>
+                                            {{ story.likes }} like
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>Sản Phẩm</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row featured__filter">
+
+                {% for story in storys %}
+                    
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-6 mix oranges fresh-meat">
+                        <div class="featured__item">
+                            <div class="featured__item__pic set-bg" data-setbg="{{story.ImageURL}}">
+                                
+                            </div>
+                            <div class="featured__item__text">
+                                <h6><a href="{% url 'detail' %}?id={{ story.id }}">{{story.name}}</a></h6>
+                                <h5></h5>
+                            </div>
+                        </div>
+                    </div>
+                    
+                {% endfor %}
+            </div>
+            <nav aria-label="Page navigation ">
+                <ul class="pagination justify-content-center mb-3">
+                    {% if products.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">&laquo; Đầu</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ products.previous_page_number }}">Trước</a>
+                        </li>
+                    {% endif %}
+
+                    <li class="page-item disabled">
+                        <span class="page-link">
+                            Trang {{ products.number }}
+                        </span>
+                    </li>
+
+                    {% if products.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ products.next_page_number }}">Tiếp</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ products.paginator.num_pages }}">Cuối &raquo;</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </section>
+    
+{% endblock main-content %}

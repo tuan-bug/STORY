@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+{% include 'app/layout/head.html' %}
+    <body>
+        {% include 'app/layout/message.html' %}
+{#        {% include 'app/layout/top_header.html' %}#}
+        {% include 'app/layout/header.html' %}
+
+        {% block blog_slider %}{% endblock blog_slider %}
+        {% block main-content %}{% endblock main-content %}
+        {% block shop-content %}{% endblock shop-content %}
+        {% block cart_content %}{% endblock cart_content %}
+        {% block blog-page %}{% endblock blog-page %}
+        {% block content_checkout %}{% endblock content_checkout %}
+        {% block register_content %}{% endblock register_content %}
+        {% block login_content %}{% endblock login_content %}
+        {% block category_context %} {% endblock category_context %}
+        {% block information %}{% endblock information %}
+        {% block blog_winshop %}{% endblock blog_winshop %}
+        {% block add_address %}{% endblock add_address %}
+        {% block edit_address %}{% endblock edit_address %}
+        {% block my_order %}{% endblock my_order %}
+
+        <!--footer-->
+        {% include 'app/layout/footer.html' %}
+        {% include 'app/layout/script.html' %}
+    </body>
+</html>

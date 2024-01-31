@@ -1,0 +1,85 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'admin/layout/head.html' %}
+{% include 'admin/layout/message.html' %}
+    <body id="page-top">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        {% include 'admin/layout/sidebar.html' %}
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                {% include 'admin/layout/topbar.html' %}
+                <div class="container mt-4" style="width: 550px">
+                    <h2 class="mb-4">SỬA THÔNG TIN NGƯỜI DÙNG</h2>
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="categoryName">Tên đăng nhập: </label>
+                            {{ form.username }}
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryDescription">Email:</label>
+                            {{ form.email }}
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryDescription">Họ: </label>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryDescription">Tên: </label>
+                            {{ form.last_name }}
+                        </div>
+                        {{ form.password1 }}
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Sửa Thông Tin</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2021</span>
+                    </div>
+                </div>
+            </footer>
+
+
+        </div>
+
+    </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    {% include 'admin/layout/modal.html' %}
+    {% include 'admin/layout/script.html' %}
+
+</body>
+<style>
+    #id_username, #id_email, #id_last_name, #id_first_name {
+            display: block;
+            width: 100%;
+            height: calc(1.5em + 0.75rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+</style>
+</html>

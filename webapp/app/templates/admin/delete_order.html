@@ -1,0 +1,18 @@
+{% extends 'admin/manage.html' %}
+{% load static %}
+{% block blog-slide %}
+{#    {% include 'admin/layout/message.html' %}#}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h2 class="card-title">Delete Category</h2>
+                <p class="card-text">Are you sure you want to delete the category ?</p>
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <a href="{% url 'myOrder' %}" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock blog-slide %}

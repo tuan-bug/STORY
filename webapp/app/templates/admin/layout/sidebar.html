@@ -1,0 +1,63 @@
+{% load static %}
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'home' %}">
+{#                <div class="sidebar-brand-icon ">#}
+{#                    <img style="height: 60px; width: 60px;" src="{%  static 'app/images/LOGO_ADMIN.jpg' %}" alt="">#}
+{#                </div>#}
+                <div class="sidebar-brand-text ">SAMMY NGUYEN</div>
+            </a>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'home_manage' %}">
+                    <img style="height: 24px; width: 24px;"  src="{%  static 'app/images/icons/icons8-home-48.png' %}" alt="">
+                    <span>Tổng quan</span></a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'manageCategory' %}">
+                    <img style="height: 24px; width: 20px;"  src="{%  static 'app/images/icons/icons8-category-50.png' %}" alt="">
+                    <span> Danh mục</span>
+                </a>
+            </li>
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'manageSlide' %}" >
+                    <img style="height: 20px; width: 20px;"  src="{%  static 'app/images/icons/icons8-slide-50.png' %}" alt="">
+                    <span>Slide</span>
+                </a>
+            </li>
+
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'manageProduct' %}">
+                    <img style="height: 24px; width: 24px;"  src="{%  static 'app/images/icons/icons8-product-64 (1).png' %}" alt="">
+                    <span>Sản phẩm</span>
+                </a>
+            </li>
+            <!-- Nav Item - Charts -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'manageUser' %}">
+                    <img style="height: 24px; width: 24px;"  src="{%  static 'app/images/icons/icons8-user-64.png' %}" alt="">
+                    <span>Thành viên</span></a>
+            </li>
+            <!-- Nav Item - Tables -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'manageOrder' %}">
+                    <img style="height: 24px; width: 24px;"  src="{%  static 'app/images/icons/icons8-order-48 (1).png' %}" alt="">
+                    <span>Đơn hàng</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'manageOrder' %}">
+                    <img style="height: 24px; width: 24px;"  src="{%  static 'app/images/icons/icons8-feedback-64.png' %}" alt="">
+                    <span>Phản hồi </span></a>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>

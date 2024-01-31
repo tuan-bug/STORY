@@ -1,0 +1,42 @@
+{% load static %}
+<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Home</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Google Font -->
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+        <!-- Css Styles -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="stylesheet" href="{%static 'app/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{%static 'app/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{%static 'app/css/elegant-icons.css' %}">
+        <link rel="stylesheet" href="{%static 'app/css/nice-select.css' %}">
+        <link rel="stylesheet" href="{%static 'app/css/jquery-ui.min.css' %}">
+        <link rel="stylesheet" href="{%static 'app/css/owl.carousel.min.css' %}">
+        <link rel="stylesheet" href="{%static 'app/css/slicknav.min.css' %}">
+        <link rel="stylesheet" href="{%static 'app/css/style.css' %}">
+        <link rel="stylesheet" href="{%static 'app/sass/style.scss' %}">
+
+        <script type="text/javascript" >
+          var user = '{{request.user}}'
+          function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+        </script>
+
+    </head>

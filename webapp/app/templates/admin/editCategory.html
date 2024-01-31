@@ -1,0 +1,72 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'admin/layout/head.html' %}
+{% include 'admin/layout/message.html' %}
+    <body id="page-top">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        {% include 'admin/layout/sidebar.html' %}
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                {% include 'admin/layout/topbar.html' %}
+                <div class="container mt-4" style="width: 550px">
+                    <h2 class="mb-4">SỬA DANH MỤC</h2>
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="categoryName">Danh Mục:</label>
+                            {{ form.sub_category }}
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryDescription">Thuộc Danh Mục Con: </label>
+                            {{ form.is_sub }}
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryDescription">Tên Danh Mục</label>
+                            {{ form.name }}
+                        </div>
+                        <div class="form-group">
+                            <label for="categoryDescription">Đường Dẫn</label>
+                            {{ form.slug }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ form.image.id_for_label }}">Chọn ảnh: </label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    {{ form.image }}
+                                    <label class="custom-file-label" for="{{ form.image.id_for_label }}">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sửa Danh Mục</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2021</span>
+                    </div>
+                </div>
+            </footer>
+
+
+        </div>
+
+    </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    {% include 'admin/layout/modal.html' %}
+    {% include 'admin/layout/script.html' %}
+</body>
+</html>

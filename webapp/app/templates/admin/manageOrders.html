@@ -1,0 +1,90 @@
+{% extends 'admin/manage.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block blog-slide %}
+
+    {% include 'admin/layout/message.html' %}
+
+    <div class="container-fluid">
+        <h1 class="h3 mb-2 text-gray-800 text-center">QUẢN LÝ ĐƠN HÀNG</h1>
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Danh sách đơn hàng</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Đơn hàng</th>
+                                <th>Ngày đặt</th>
+                                <th>Khách hàng</th>
+                                <th>Thanh Toán</th>
+                                <th>Giao hàng</th>
+                                <th>Tổng tiền</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                                <tr>
+                                    <td class="shoping__cart__price">
+                                        {{ order.id }}
+                                    </td>
+                                    <td>
+                                        {{ order.time | date:"d/m/Y H:i" }}
+                                    </td>
+                                    <td>
+                                        {{ order.customer.username }}
+                                    </td>
+                                    <td >
+                                        {% if order_check|get_item:order.id %}<span style="background: #ffc58b; padding: 2px 8px; margin: 0 3px; border-radius: 10px; "> Đã thanh toán </span>
+                                        {% else %} <span style="background: #dfe4e8; padding: 2px 8px; border-radius: 10px;"> Chưa thanh toán </span> {% endif %}
+
+                                    </td>
+                                    <td>
+                                        Đang giao
+                                    </td>
+                                    <td>
+                                        {{ order_price |get_item:order.id }}<sup> đ</sup>
+                                    </td>
+                                    <td>
+                                        <a style="" href="{% url 'viewOrder' %}?id={{ order.id }}" class="btn btn-info btn-circle mr-2">
+                                            <img src="{% static 'admin/icons/view.png' %}" alt="">
+                                        </a>
+                                        <a href="{% url 'manageOrder' %}" class="btn btn-warning btn-circle mr-2">
+                                            <img src="{% static 'admin/icons/pen (1).png' %}" alt="">
+                                        </a>
+                                        <a href="" data-product-id="{{ order.id }}"
+                                            data-product-name="{{ order.name }}"
+                                            class="btn btn-danger btn-circle"
+                                            data-toggle="modal" data-target="#deleteOrderModal_{{ order.id }}">
+                                            <img src="{% static 'admin/icons/trash (1).png' %}" alt="">
+                                        </a>
+                                        <div class="modal" id="deleteOrderModal_{{ order.id }}">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Xóa Đơn Hàng </h5>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Bạn có chắc chắn muốn xóa đơn hàng này không <span id="product-name"></span>?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                                        <a href="{% url 'deleteOrder' order.id %}" type="button" class="delete-product btn btn-danger">Xác nhận</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock blog-slide %}

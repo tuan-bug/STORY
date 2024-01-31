@@ -17,7 +17,11 @@ urlpatterns = [
     path('logout/', views.logoutPage, name="logout"),
     path('search/', views.searchProduct, name="search"),
     path('category/', views.category, name="category"),
+
     path('detail/', views.detail, name="detail"),
+    path('chapter_detail/<slug:chapter_slug>/', views.detail_chapter, name='chapter_detail'),
+
+
     path('address/', views.Continue1, name="address"),
     path('information/', views.Information, name="information"),
     path('edit_information/', views.edit_information, name="edit_information"),

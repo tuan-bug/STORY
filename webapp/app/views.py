@@ -13,7 +13,7 @@ from .python.app.shop import shop
 from .python.app.category import category
 from .python.app.check_address import Continue1
 from .python.app.checkout import checkout
-from .python.app.detail import detail
+from .python.app.detail import detail, detail_chapter
 from .python.app.information import Information, edit_information
 from .python.app.login import loginPage, logoutPage
 from .python.app.register import register

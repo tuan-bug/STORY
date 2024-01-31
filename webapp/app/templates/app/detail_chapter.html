@@ -1,0 +1,228 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block category_context %}
+    <section class="">
+        <div class="container">
+            <div class="row">
+            <div style="border-bottom: 2px solid #ecedee;background-color:  #f6f7f8;" class="col-lg-12 p-2">
+                <div class="mb-2 mt-2">
+                    <span style="font-size: 20px; font-weight: 700"><a href="{% url 'detail' %}?slug={{ story.slug }}">{{ story.name }}</a></span>
+                    <span style="font-size: 20px;"> - {{ chapter.name }}</span>
+                    [ Cập nhập lúc : {{ chapter.date }} ]
+                </div>
+
+            </div>
+            <div style="background-color:  #d9edf7;" class="col-lg-12 text-center mb-3 p-3">
+                <span>Sử dụng  mũi tên trái ( <-- ) hoặc phải ( --> ) để chuyển chapter</span>
+                <br>
+                <span style="color: red">Vui lòng reload lại trang nếu không xem ược ảnh</span>
+            </div>
+
+            <div class="col-lg-12 align-items-center mb-3 p-3">
+                <div class="d-flex justify-content-center align-items-center" id="">
+                    <a style="font-size: 30px; color: #d9534f" class="" href="/" title="Trang chủ"><i class="fa fa-home"></i></a>
+                    <a style="font-size: 30px; color: #d9534f" class="p-3" title="" href=""><i class="fa fa-list"></i></a>
+
+                    {% if prev_chapter %}
+                        <a href="{% url 'chapter_detail' chapter_slug=story.slug %}?chap={{ prev_chapter.id }}" class="p-2 prev a_prev">
+                            <i class="fa fa-chevron-left"></i>
+                        </a>
+                    {% else %}
+                        <span class="p-2 prev a_prev disabled"><i class="fa fa-chevron-left"></i></span>
+                    {% endif %}
+                    <div style="width: 350px">
+                        <form method="get" action="{% url 'chapter_detail' chapter_slug=story.slug %}" class="w-100" id="chapterForm">
+                            {% csrf_token %}
+                            <select style="width: 100%" name="chap" id="ctl00_mainContent_ddlSelectChapter" class="select-chapter" onchange="document.getElementById('chapterForm').submit()">
+                                <option value="">{{ chapter.name }}</option>
+                                {% for chapter in chapters %}
+                                    <option value="{{ chapter.id }}">{{ chapter.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </form>
+                    </div>
+
+                    {% if next_chapter %}
+                        <a href="{% url 'chapter_detail' chapter_slug=story.slug %}?chap={{ next_chapter.id }}" class="p-2 next a_prev">
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                    {% else %}
+                        <span class="next a_next disabled"><i class="fa fa-chevron-right"></i></span>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <div class="col-lg-12">
+                {% for img in images %}
+                    <div style="text-align: center" class="page-chap">
+                    <img src="{{ img.ImageURL }}" alt="">
+                </div>
+                {% endfor %}
+            </div>
+            <div class="col-lg-12 text-center mb-4 mt-2">
+                
+                    <a  href="{% url 'chapter_detail' chapter_slug=story.slug %}?chap={{ prev_chapter.id }}" title="" class="btn-prev mr-2 ">
+                        <em class="fa fa-chevron-left"></em>
+                        Chap trước
+                    </a>
+                    <a style=""  href="{% url 'chapter_detail' chapter_slug=story.slug %}?chap={{ next_chapter.id }}" title="" class="btn-next ">
+                        Chap sau
+                        <em class="fa fa-chevron-right"></em>
+                    </a>
+                
+            </div>
+
+{#                <div class="col-lg-12">#}
+{#                    <div class="product__details__tab">#}
+{#                        <ul class="nav nav-tabs" role="tablist">#}
+{#                            <li class="nav-item">#}
+{#                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"#}
+{#                                    aria-selected="true">Chương</a>#}
+{#                            </li>#}
+{##}
+{#                            <li class="nav-item">#}
+{#                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"#}
+{#                                    aria-selected="false">Bình luận <span>({{ comments.count }})</span></a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                        <div class="tab-content">#}
+{#                            <div class="tab-pane active" id="tabs-1" role="tabpanel">#}
+{#                                <div class="product__details__tab__desc">#}
+{##}
+{#                                    <div style="max-width: 800px; " class="container shadow rounded">#}
+{#                                        <div class="row">#}
+{#                                            <div class="col-lg-12 col-md-6 d-flex p-3">#}
+{#                                                <div class="col-lg-10 col-md-6">#}
+{#                                                    <b>Số chương</b>#}
+{##}
+{#                                                </div>#}
+{#                                                <div class="col-lg-2 ">#}
+{#                                                Sắp xếp#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            #}
+{#                                            {% for chapter in chapters %}#}
+{#                                                <a class="d-flex col-lg-12" href="https://www.nettruyenclub.com/truyen-tranh/vo-anh-de-lai-pha-hong-showbiz-75794">#}
+{#                                                    <div class="col-lg-2 col-md-2">#}
+{#                                                        <div>#}
+{#                                                            <div class="product__details__pic">#}
+{#                                                                <div class="product__details__pic__item">#}
+{#                                                                    <img  class="product__details__pic__item--large"#}
+{#                                                                        src="{{chapter.ImageURL}}" alt="">#}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <div class="col-lg-8 col-md-8 d-flex align-items-center ">#}
+{#                                                        <div >#}
+{#                                                            <div class="product__details__pic">#}
+{#                                                                <div class="product__details__pic__item">#}
+{#                                                                    Chương 1#}
+{#                                                                </div>#}
+{#                                                                <div class="product__details__pic__item">#}
+{#                                                                    {{ chapter.name }}#}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    <div class="col-lg-2 col-md-2 d-flex align-items-center">#}
+{#                                                        <div>#}
+{#                                                            <div class="product__details__pic">#}
+{#                                                                {{ chapter.date | date:"d/m/Y" }}#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </a>#}
+{#                                            {% endfor %}#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                            <div class="tab-pane" id="tabs-3" role="tabpanel">#}
+{#                                <div class="product__details__tab__desc">#}
+{#                                    <div class="col-lg-12">#}
+{#                                        <div class="">#}
+{#                                            <div class="tab-content form-outline w-100">#}
+{#                                                <form  method="POST" action="">#}
+{#                                                    {% csrf_token %}#}
+{#                                                    {{ form.title }}#}
+{#                                                    <div class="float-end mt-2 pt-1">#}
+{#                                                        <button name="comment" type="submit" class="btn primary-btn btn-sm">Bình luận</button>#}
+{#                                                    </div>#}
+{#                                                </form>#}
+{#                                                <h4 class="pt-3 pb-2">Bình luận</h4>#}
+{#                                                    {% for comment in comments %}#}
+{#                                                    <div class="d-flex flex-start mb-4">#}
+{#                                                        <img class="rounded-circle shadow-1-strong me-3"#}
+{#                                                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp" alt="avatar" width="55"#}
+{#                                                            height="55" />#}
+{#                                                        <div class="ml-3">#}
+{#                                                           <span> <span style="font-weight: bold; margin-right: 10px;">{{ comment.user.first_name }} </span>{{ comment.date|date:"d/m/Y" }} </span>#}
+{##}
+{##}
+{#                                                            <p class="mb-0">{{ comment.title }}</p>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                    {% endfor %}#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+        </div>
+    </section>
+
+    <style>
+    .btn-next {
+        background-color: #d9534f;
+        width: 120px;
+        color: #fff;
+        padding: 9px;
+        border-radius: 0 4px 4px 0;
+    }
+    .btn-prev {
+        background-color: #d9534f;
+        width: 120px;
+        color: #fff;
+        padding: 9px;
+        border-radius: 4px 0 0 4px;
+    }
+    
+    .nice-select {
+        width: 100%;
+    }
+    .list {
+        width: 100%;
+    }
+    .prev {
+        display: inline-block;
+        width: 46px;
+        background: #d9534f;
+        color: #fff;
+        text-align: center;
+        border-color: #d43f3a;
+        height: 40px;
+        padding-top: 7px;
+        margin-right: 4px ;
+        border-radius: 4px 0 0 4px;
+    }
+    .next {
+        display: inline-block;
+        width: 46px;
+        background: #d9534f;
+        color: #fff;
+        text-align: center;
+        border-color: #d43f3a;
+        height: 40px;
+        padding-top: 7px;
+        margin-left: 4px ;
+        border-radius:  0 4px 4px 0 ;
+    }
+    </style>
+{% endblock category_context %}

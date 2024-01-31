@@ -54,7 +54,7 @@
                         <div class="product__details__text mb-2"> <b> Xếp hạng: </b> xxx </div>
                     
                     <div class="d-flex ">
-                         <a style="color: white;" class="primary-btn btn-sm border-0 text-uppercase" href="{% url 'edit_information' %}">Đọc ngay</a>
+                         <a style="color: white;" class="primary-btn btn-sm border-0 text-uppercase" href="{% url 'chapter_detail' chapter_slug=slug %}?chap={{ first_chapter.id }}">Đọc ngay</a>
 
                         <a style="color: white;" class="primary-btn btn-sm border-0 text-uppercase" href="{% url 'addAddress' %}">Chap mới nhất</a>
                         <a style="color: white;" class="primary-btn btn-sm border-0 text-uppercase" href="{% url 'addAddress' %}">Theo dõi</a>
@@ -98,7 +98,7 @@
                                             </div>
                                             
                                             {% for chapter in chapters %}
-                                                <a class="d-flex col-lg-12" href="https://www.nettruyenclub.com/truyen-tranh/vo-anh-de-lai-pha-hong-showbiz-75794">
+                                                <a class="d-flex col-lg-12" href="{% url 'chapter_detail' chapter_slug=slug %}?chap={{ chapter.id }}">
                                                     <div class="col-lg-2 col-md-2">
                                                         <div>
                                                             <div class="product__details__pic">
